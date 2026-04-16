@@ -102,6 +102,7 @@ for window_handle in driver.window_handles:
             driver.switch_to.window(window_handle)
             break
 
+
 time.sleep(10)
 
 input_element = driver.find_elements(By.TAG_NAME, "input")
@@ -121,7 +122,32 @@ for e in s_element:
         e.click()
         break
 
-time.sleep(20)
+time.sleep(10)
+
+driver.switch_to.window(original_window)
+
+driver.find_element(By.CSS_SELECTOR, '[title="Chat"]').click()
+time.sleep(5)
+
+input_element = driver.find_elements(By.TAG_NAME, "textarea")
+for i in input_element:
+    if i.get_attribute("placeholder") == "Type a message... Use @ to mention users or workspaces":
+        i.send_keys("This is a message Test")
+        break
+
+time.sleep(3)
+
+s_element = driver.find_elements(By.TAG_NAME, "button")
+
+
+for e in s_element:
+    if e.get_attribute("class") == "px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors":
+        e.click()
+        break
+
+time.sleep(50)
+
+
 
 driver.quit()
 
